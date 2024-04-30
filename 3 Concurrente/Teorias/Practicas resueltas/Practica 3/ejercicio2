@@ -1,0 +1,158 @@
+programa ejercicio2
+procesos
+  proceso cientoOchenta
+  comenzar
+    repetir 2 
+      derecha
+  fin
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso juntarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso juntarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso escalonesFlores
+  variables
+    lado: numero
+  comenzar
+    lado:= 5
+    repetir 4
+      repetir lado
+        mover
+      juntarFlores  
+      derecha
+      repetir lado
+        mover
+      juntarFlores  
+      izquierda
+      lado:= lado - 1
+  fin
+  proceso vueltaFlores
+  comenzar
+    mover
+    derecha
+    BloquearEsquina(16,16)
+    mover
+    EnviarMensaje(1,robot3)
+    cientoOchenta
+    mover
+    LiberarEsquina(16,16)
+    repetir 2
+      mover
+    derecha   
+  fin
+  proceso escalonesInvertidosFlores
+  variables
+    lado: numero 
+  comenzar
+    lado:= 2
+    repetir lado
+      mover
+    juntarFlores  
+    izquierda
+    lado:= lado + 1
+    repetir 3
+      repetir lado
+        mover
+      juntarFlores  
+      derecha
+      repetir lado
+        mover
+      juntarFlores  
+      izquierda
+      lado:= lado + 1      
+  fin
+  proceso escalonesPapeles
+  variables
+    lado: numero
+  comenzar
+    lado:= 5
+    repetir 4
+      repetir lado
+        mover
+      juntarPapeles
+      izquierda
+      repetir lado
+        mover
+      juntarPapeles
+      derecha
+      lado:= lado - 1    
+  fin
+  proceso vueltaPapeles
+  comenzar
+    mover
+    izquierda
+    BloquearEsquina(16,16)
+    mover
+    EnviarMensaje(2, robot3)
+    cientoOchenta
+    mover
+    LiberarEsquina(16,16)
+    repetir 2
+      mover
+    izquierda  
+  fin
+  proceso escalonesInvertidosPapeles
+  variables
+    lado: numero
+  comenzar
+    lado:= 3
+    repetir 2 
+      mover
+    juntarPapeles
+    derecha
+    repetir 3
+      repetir lado
+        mover
+      juntarPapeles
+      izquierda
+      repetir lado
+        mover
+      juntarPapeles
+      derecha
+      lado:= lado + 1    
+  fin
+areas
+  areaCompartida: AreaC(1,1,100,100)
+robots
+  robot recolectorFlores
+  comenzar
+    escalonesFlores
+    vueltaFlores
+    escalonesInvertidosFlores
+  fin
+  robot recolectorPapeles
+  comenzar
+    escalonesPapeles
+    vueltaPapeles
+    escalonesInvertidosPapeles
+  fin
+  robot jefe
+  variables
+    quien: numero
+  comenzar
+    RecibirMensaje(quien, *)
+    Informar(quien)
+    RecibirMensaje(quien, *)
+  fin
+variables
+  robot1: recolectorFlores
+  robot2: recolectorPapeles
+  robot3: jefe
+comenzar
+  AsignarArea(robot1,areaCompartida)
+  AsignarArea(robot2,areaCompartida)
+  AsignarArea(robot3,areaCompartida)
+  Iniciar(robot1, 1,1)
+  Iniciar(robot2, 31,1)
+  Iniciar(robot3, 15,1)
+fin  
