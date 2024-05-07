@@ -1,4 +1,4 @@
-program codigosNecesarios;
+program codigosNecesarioss;
 
 //arbol de listass
 procedure agregarAdelante(var L:lista; d:dato);
